@@ -56,6 +56,15 @@ app.post('/cheeses', async(req, res) => {
     }
 });
 
+//CHEESE DELETE ROUTE
+app.delete('/cheeses/:id', async(req, res) => {
+    try {
+        res.json(await Cheese.findByIdAndDelete(req.params.id))
+    } catch (error) {
+        res.status(400).json(error)
+    }
+});
+
 //Tell the app to listen
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`listening on port: ${PORT}`))
