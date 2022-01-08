@@ -65,6 +65,15 @@ app.delete('/cheeses/:id', async(req, res) => {
     }
 });
 
+//CHEESE UPDATE ROUTE
+app.put('/cheeses/:id', async(req, res) => {
+    try {
+        res.json(await Cheese.findByIdAndUpdate(req.params.id, req.body, { new: true }))
+    } catch (error) {
+        res.status(400).json(error)
+    }
+});
+
 //Tell the app to listen
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`listening on port: ${PORT}`))
