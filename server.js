@@ -24,6 +24,13 @@ mongoose.connection
     .on('error', (error) => console.log(error));
 
 //Define Models
+const CheeseSchema = new mongoose.Schema({
+    name: String,
+    countryOfOrigin: String,
+    image: String
+});
+
+const Cheese = mongoose.model("Cheese", CheeseSchema);
 
 //Define Routes
 app.get('/', (req, res) => {
