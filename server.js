@@ -33,9 +33,19 @@ const CheeseSchema = new mongoose.Schema({
 const Cheese = mongoose.model("Cheese", CheeseSchema);
 
 //Define Routes
+//test route
 app.get('/', (req, res) => {
     res.send("hello world");
 })
+
+//CHEESE INDEX ROUTE
+app.get('/cheeses', async(req, res) => {
+    try {
+        res.send(await Cheese.find({}))
+    } catch (error) {
+        res.status(400).json(error)
+    }
+});
 
 //Tell the app to listen
 const PORT = process.env.PORT || 3000;
