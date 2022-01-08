@@ -47,6 +47,15 @@ app.get('/cheeses', async(req, res) => {
     }
 });
 
+//CHEESE CREATE ROUTE
+app.post('/cheeses', async(req, res) => {
+    try {
+        res.json(await Cheese.create(req.body))
+    } catch (error) {
+        res.status(400).json(error)
+    }
+});
+
 //Tell the app to listen
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`listening on port: ${PORT}`))
