@@ -1,16 +1,35 @@
 //Require Dependencies
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const morgan = require('morgan');
 
 //Initalize the App
+const app = express();
 
 //Configure Settings
+require('dotenv').config();
 
 //Mount Middleware
+app.use(express.json());
+app.use(morgan('dev'));
+app.use(cors());
 
 //Connect and Configure MongoDB
+mongoose.connect(process.env.DATABASE_URL);
+
+mongoose.connection
+    .on('open', () => console.log('Connected to MongoDB'))
+    .on('close', () => console.log('Disconnected from MongoDB'))
+    .on('error', (error) => console.log(error));
 
 //Define Models
 
 //Define Routes
-
+app.get('/', (req, res) => {
+    res.send("hello world");
+})
 
 //Tell the app to listen
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`listening on port: ${PORT}`))
